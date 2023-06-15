@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 AQUEST SCRIPT DECARREGA DE YFINANCE LES DADES DE COTITZACIÓ, LOCALITZA ELS MÀXIMS Y MÍNIMS LOCALS I ELS MOSTRA EN UN GRÀFIC:
 - MÀXIM LOCAL = SI EL MÀXIM DE LES BARRES ANTERIOR I POSTERIOR SON MÉS BAIXOS QUE L'ACTUAL
@@ -23,7 +24,7 @@ import mplfinance as mpf
 ###########################
 ticker = '^SPX'
 start = '2023-06-01'
-temporalidad = "5m"     # h, d, wk,....
+temporalidad = "1h"     # h, d, wk,....
 
 ### Versió amb INPUTS
 # ticker = str(input("Introduce el ticker (formato yfinance): "))
@@ -81,9 +82,9 @@ def CleanLocalMaxMin(df_max_local, df_min_local):
         df_range = df_min_local.loc[(df_min_local['date'] > start_date) & (df_min_local['date'] < end_date)]
         num_filas = df_range.shape[0]
         if num_filas > 1:
-           val_min = df_min_local['min_local'].loc[(df_min_local['date'] > start_date) & (df_min_local['date'] < end_date)].min()        
-           rango_filas = df_min_local.loc[(df_min_local['date'] > start_date) & (df_min_local['date'] < end_date)]
-           df_min_local = df_min_local.drop(df_min_local[(df_min_local['min_local'] != val_min) & (df_min_local.index.isin(rango_filas.index))].index)
+            val_min = df_min_local['min_local'].loc[(df_min_local['date'] > start_date) & (df_min_local['date'] < end_date)].min()        
+            rango_filas = df_min_local.loc[(df_min_local['date'] > start_date) & (df_min_local['date'] < end_date)]
+            df_min_local = df_min_local.drop(df_min_local[(df_min_local['min_local'] != val_min) & (df_min_local.index.isin(rango_filas.index))].index)
     
     df_min_local = df_min_local.reset_index(drop=True)
     
