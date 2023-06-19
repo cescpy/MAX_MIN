@@ -19,18 +19,6 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 import mplfinance as mpf
 
-###########################
-### INTRODUIR VARIABLES ###
-###########################
-ticker = '^SPX'
-start = '2023-01-01'
-temporalidad = "1d"     # h, d, wk,....
-
-### Versió amb INPUTS
-# ticker = str(input("Introduce el ticker (formato yfinance): "))
-# start = str(input("Introduce la fecha de inicio de los datos(formato aaaa-mm-dd): "))
-# temporalidad = str(input("Introduce la temporalidad (1h, 1d, 1wk,...): "))
-
 #############################
 ### DEFINICIÓ DE FUNCIONS ###
 #############################
@@ -127,20 +115,5 @@ def GraphLocalMaxMin (df, df_max, df_min, ticker, temporalidad, start):
 
     plt.show()
     
-
-######################
-### INICI PROGRAMA ###
-######################
-"""
-TROBAR ELS MAX I MIN LOCALS I MOSTRAR UNA GRÀFICA
-"""
-# DESCARREGO LES DADES DE COTITZACIÓ
-df = DownloadData(ticker, start, temporalidad)
-# LOCALITZO ELS MAX I MIN LOCALS
-df_max_local, df_min_local = LocalMaxMin(df)
-# NETEJO ELS MAX I MIN INTERCALATS EN EXCÉS
-df_max_local, df_min_local = CleanLocalMaxMin(df_max_local, df_min_local)
-# GRAFICO LA COTITZACIÓ AMB ELS MAX I MIN LOCALS MARCATS AMB PUNTS
-GraphLocalMaxMin (df, df_max_local, df_min_local, ticker, temporalidad, start)
 
 
